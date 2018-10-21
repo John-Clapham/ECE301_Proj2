@@ -1,5 +1,5 @@
 %%% data preparation for ECE301 Project #2 
-%%  Y. Lu   , Bradley University
+%%  Alex Topping/John Clapham   , Bradley University
 
 %% created 10/20/2016
 
