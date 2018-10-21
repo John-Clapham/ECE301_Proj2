@@ -89,3 +89,7 @@ ylabel('Amplitude');
 
 
 pause ( round(max(t3))*1e-3);
+
+%% Segmentation 
+t_start = [930 1380 1890 2870 3400 3910 4610 5040 5480]
+t_end = [1070 1520 2030 3010 3540 4050 4750 5181 5620]
