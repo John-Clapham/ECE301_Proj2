@@ -43,7 +43,7 @@ load all_datasets_project2.mat;
 
 % Plot the dataset1 and play the audio 
 % -----dataset1 : clean DTMF data -------
-soundsc(dataset1,fs);  
+%soundsc(dataset1,fs);  
 
 figure;plot(t1,dataset1);grid on;
 title([ 'dataset1;  sampling rate = '  num2str(fs) 'Hz' ]);
@@ -51,7 +51,7 @@ xlabel('Time [ms]');
 ylabel('Amplitude');
 
 
-pause ( round(max(t1))*1e-3);
+%pause ( round(max(t1))*1e-3);
 
 
 % Plot the dataset2 and play the audio 
@@ -60,7 +60,7 @@ pause ( round(max(t1))*1e-3);
 %    DTMF signals with light over-talk 
 %  1 of 10 numbers is corrupted.
 
-soundsc(dataset2,fs); %% play the signal(light over-talk)
+%soundsc(dataset2,fs); %% play the signal(light over-talk)
 
 
 
@@ -70,7 +70,7 @@ title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
 xlabel('Time [ms]');
 ylabel('Amplitude');
 
-pause ( round(max(t2))*1e-3);
+%pause ( round(max(t2))*1e-3);
 
 
 
@@ -80,7 +80,7 @@ pause ( round(max(t2))*1e-3);
 %%   DTMF signals with heavy over-talk
 %% most numbers are corrupted
 
-soundsc(dataset3,fs); %% play the signal of heavy over-talk
+%soundsc(dataset3,fs); %% play the signal of heavy over-talk
 
 figure;plot(t3,dataset3);grid on;
 title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
@@ -88,7 +88,7 @@ xlabel('Time [ms]');
 ylabel('Amplitude');
 
 
-pause ( round(max(t3))*1e-3);
+%pause ( round(max(t3))*1e-3);
 
 %% Segmentation 
 t_start = [930 1380 1890 2870 3400 3910 4610 5040 5480]

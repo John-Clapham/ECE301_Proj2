@@ -1,5 +1,5 @@
-%% Test built-in Goertzel Algorithm （ECE301_17FA)
-%% Y. Lu
+%% Test built_in Goertzel Algorithm ECE301_17FA)
+%% Alex Topping/John Clapham
 %% 11/4/2017
 %% It aims to provide a comparative result of direct FFT and built-in Goertzel algorithm.
 

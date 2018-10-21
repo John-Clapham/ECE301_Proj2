@@ -1,5 +1,5 @@
 %% Bradle Univeristy
-%% Y. Lu   10/20/2016
+%% Alex Topping/John Clapham   10/20/2016
 %% revised 10/24/2016 
 %% updated 9/29/2017
 
@@ -32,6 +32,7 @@ digit5_seg(start_sample: stop_sample)= dataset1(start_sample: stop_sample);
 %%%
 M = 44100;  %% 
 digit5_spectrum = fft(digit5_dataset1,M);
+
 figure; subplot(211);
 plot(t1,digit5_seg);
 grid on;
@@ -39,6 +40,7 @@ xlabel('Time [ms]');
 ylabel('Amplitude');
 title('segmented signal');
 xlim([3000 4000]);
+
 subplot(212);
 plot(abs(digit5_spectrum));
 title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
