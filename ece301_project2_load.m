@@ -2,15 +2,7 @@
 %%  Alex Topping/John Clapham   , Bradley University
 
 %% created 10/20/2016
-
-%% rev1:   10/24/2016 
-% (the device ID and channel were computer-dependent when the data were recorded. 
-% The file was updated to solve the problem)
-
-%% updated 9/29/2017 (new datasets)
-
-%% new release on 9/20/2018 
-
+%%revised 10/28/2018
 
 clear all; clc; close all;
 %%% 
@@ -93,3 +85,4 @@ ylabel('Amplitude');
 %% Segmentation 
 t_start = [930 1380 1890 2870 3400 3910 4610 5040 5480]
 t_end = [1070 1520 2030 3010 3540 4050 4750 5181 5620]
+
