@@ -91,13 +91,58 @@ ylabel('Amplitude');
 %pause ( round(max(t3))*1e-3);
 
 %% Segmentation 
-t_start = [930 1380 1890 2870 3400 3910 4610 5040 5480 5910];
-t_end = [1070 1520 2030 3010 3540 4050 4750 5181 5620 6050];
+t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
+t_end = t_start + 0.6 * (10^4);
 
 dig_1 = dataset1(t_start(1):t_end(1));
-figure;plot(dig_1(1))
+dig_1_fft = abs(fft(dig_1, 44100));
+figure;plot(dig_1_fft)
+title("dig 1 fft")
 
+dig_2 = dataset1(t_start(2):t_end(2));
+dig_2_fft = abs(fft(dig_2, 44100));
+figure;plot(dig_2_fft)
+title("dig 2 fft")
 
+dig_3 = dataset1(t_start(3):t_end(3));
+dig_3_fft = abs(fft(dig_3, 44100));
+figure;plot(dig_3_fft)
+title("dig 3 fft")
+
+dig_4 = dataset1(t_start(4):t_end(4));
+dig_4_fft = abs(fft(dig_4, 44100));
+figure;plot(dig_4_fft)
+title("dig 4 fft")
+
+dig_5 = dataset1(t_start(5):t_end(5));
+dig_5_fft = abs(fft(dig_5, 44100));
+figure;plot(dig_5_fft)
+title("dig 5 fft")
+
+dig_6 = dataset1(t_start(6):t_end(6));
+dig_6_fft = abs(fft(dig_6, 44100));
+figure;plot(dig_6_fft)
+title("dig 6 fft")
+
+dig_7 = dataset1(t_start(7):t_end(7));
+dig_7_fft = abs(fft(dig_7, 44100));
+figure;plot(dig_7_fft)
+title("dig 7 fft")
+
+dig_8 = dataset1(t_start(8):t_end(8));
+dig_8_fft = abs(fft(dig_8, 44100));
+figure;plot(dig_8_fft)
+title("dig 8 fft")
+
+dig_9 = dataset1(t_start(9):t_end(9));
+dig_9_fft = abs(fft(dig_9, 44100));
+figure;plot(dig_9_fft)
+title("dig 9 fft")
+
+dig_10 = dataset1(t_start(10):t_end(10));
+dig_10_fft = abs(fft(dig_10, 44100));
+figure;plot(dig_10_fft)
+title("dig 10 fft")
 
 
 
