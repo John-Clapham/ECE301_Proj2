@@ -2,14 +2,8 @@
 %%  Alex Topping/John Clapham, Bradley University
 
 %% created 10/20/2016
+%% updated 10/28/2018
 
-%% rev1:   10/24/2016 
-% (the device ID and channel were computer-dependent when the data were recorded. 
-% The file was updated to solve the problem)
-
-%% updated 9/29/2017 (new datasets)
-
-%% new release on 9/20/2018 
 
 
 clear all; clc; close all;
@@ -97,7 +91,8 @@ ylabel('Amplitude');
 t_start = [850 1200 1800 2800 3350 3844 4550 4950 5400 5850]; %from observation
 t_end = [1100 1690 2100 3050 3600 4100 4800 5250 5700 6150]; %from observation
 
-
+start_sample = zeros;
+stop_sample = zeros;
 for i = 1:1:10
     start_sample(i) = round(t_start(i) *1e-3 *fs); %Array with start segment location
     stop_sample(i) = round(t_end(i)*1e-3*fs); %Array with end segment location
