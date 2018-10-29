@@ -16,6 +16,8 @@ device_ID = 1;
 
 load all_datasets_project2.mat;
 %% clean DTMF signals without over-talk 
+figure
+plot(t1,dataset1)
 
 %%% the 5th digit (by observation) 
 start_time = 3380; %% ms
@@ -26,8 +28,7 @@ stop_sample = round(stop_time*1e-3*fs);
 digit5_dataset1 = dataset1(start_sample: stop_sample);
 
 digit5_seg = zeros(size(dataset1));
-digit5_seg(start_sample: stop_sample)= dataset1(start_sample: stop_sample);
-
+digit5_seg(start_sample: stop_sample) = dataset1(start_sample: stop_sample);
 
 %%%
 M = 44100;  %% 
