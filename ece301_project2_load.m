@@ -118,22 +118,41 @@ for i = 1:1:10  %this is really just for plotting reasons
 end
 
 %%ploting (did this in for loop because I didn't want to type it all out...
-for i = 1:1:10
-    figure(i); subplot(211);
-    plot(t1,digit_seg(:,i));
-    grid on;
-    xlabel('Time [ms]');
-    ylabel('Amplitude');
-    title('segmented signal');
-    %xlim([t_start(i) t_end(i)]);
-    
-    subplot(212);
-    plot(abs(digit_spectrum(:,i)));
-    title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
-    xlabel('Frequency [Hz]');
-    ylabel('Amplitude');
+% for i = 1:1:10
+%     figure(i); subplot(211);
+%     plot(t1,digit_seg(:,i));
+%     grid on;
+%     xlabel('Time [ms]');
+%     ylabel('Amplitude');
+%     title('segmented signal');
+%     %xlim([t_start(i)-50 t_end(i)+50]);
+%     
+%     subplot(212);
+%     plot(abs(digit_spectrum(:,i)));
+%     title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
+%     xlabel('Frequency [Hz]');
+%     ylabel('Amplitude');
+% 
+%     xlim([0 2000]);
+%     grid on;
+% end
 
-    xlim([0 2000]);
-    grid on;
-end
+%This is a test to locate the high and low frequency of digit
+figure; subplot(211);
+plot(t1,digit_seg(:,1));
+grid on;
+xlabel('Time [ms]');
+ylabel('Amplitude');
+title('segmented signal');
+xlim([t_start(1)-50 t_end(1)+50]);
+    
+subplot(212);
+plot(abs(digit_spectrum(:,1)));
+findpeaks(real(abs(digit_spectrum(:,1))),'MinPeakProminence',10);
+title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
+xlabel('Frequency [Hz]');
+ylabel('Amplitude');
+
+xlim([0 2000]);
+grid on;
 
