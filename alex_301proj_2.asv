@@ -112,11 +112,13 @@ for i = 1:length(freq_table)
     
     q(i) = trapz(abs(goertzel_filt));
 end
+ans = q
+max_q = find(max(q))
+freq_component_1 = freq_table(max_q)
+q(max_q) = 0;
 
-max_q1 = find(max(q));
-freq_component_1 = freq_table(max_q1)
 
-
+freq_component_2 = freq_table(max_q)
 
 
 
