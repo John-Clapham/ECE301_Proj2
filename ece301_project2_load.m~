@@ -2,7 +2,7 @@
 %%  Alex Topping/John Clapham, Bradley University
 
 %% created 10/20/2016
-%% updated 10/28/2018
+%% updated 10/29/2018
 
 
 
@@ -114,6 +114,7 @@ end
 
 %%
 %ploting (did this in for loop because I didn't want to type it all out...)
+%dont really need this in the future except for findpeaks function
 location = zeros;
 for i = 1:1:10
     figure(i+1); subplot(211);
@@ -126,10 +127,10 @@ for i = 1:1:10
     
     subplot(212);
     plot(abs(digit_spectrum(:,i)));
-    [amp,freq] = findpeaks(real(abs(digit_spectrum(1:2000,i))),'MinPeakProminence',25,'MinPeakDistance',); %locs is freq of peaks
-    location(1,i) = freq(1,1);  %making a location matrix with all found freq (col 1 low, col 2 high)
-    location(2,i) = freq(2,1);  %" " "
-    hold on; plot(location(1,i),amp(1,1),'x'); hold on; plot(location(2,i),amp(2,1),'x');
+    [amp,freq] = findpeaks(real(abs(digit_spectrum(1:2000,i))),'MinPeakProminence',25,'MinPeakDistance',300); %locs is freq of peaks
+    frequency(1,i) = freq(1,1);  %making a location matrix with all found freq (col 1 low, col 2 high)
+    frequency(2,i) = freq(2,1);  %" " "
+    hold on; plot(frequency(1,i),amp(1,1),'x'); hold on; plot(frequency(2,i),amp(2,1),'x');
     title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
     xlabel('Frequency [Hz]');
     ylabel('Amplitude');
@@ -137,22 +138,35 @@ for i = 1:1:10
     grid on;
 end
 
-%This is a test to locate the high and low frequency of digit
-% figure; subplot(211);
-% plot(t1,digit_seg(:,1));
-% grid on;
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
-% title('segmented signal');
-% xlim([t_start(1)-50 t_end(1)+50]);
-%     
-% subplot(212);
-% plot(abs(digit_spectrum(:,1)));
-% [amp,freq] = findpeaks(real(abs(digit_spectrum(1:2000,1))),'MinPeakProminence',10);
-% hold on; plot(freq,amp,'x');
-% title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
-% xlabel('Frequency [Hz]');
-% ylabel('Amplitude');
-% xlim([0 2000]);
-% grid on;
+%%
+%connecting each frequency with associated digit... theres got to be a
+%better way to do this... (tried with switch statements but unsuccessful
+number = zeros;
+for i = 1:1:10
+            if (frequency(2,i)<1239 && frequency(2,i)>1179 && 667<frequency(1,i) && frequency(1,i)<727)
+                number(i) = 1;
+            elseif (frequency(2,i)<1239 && frequency(2,i)>1179 && 740<frequency(1,i) && frequency<800)
+                number(i) = 4;
+            elseif (frequency(2,i)<1239 && frequency(2,i)>1179 && (822 < frequency(1,i) < 882))
+                number(i) = 7;
+            elseif (1306 < frequency(2,i) < 1366 && 667<frequency(1,i) && frequency(1,i)<727)
+                number(i) = 2;
+            elseif (1306 < frequency(2,i) < 1366 && 740 < frequency(1,i) < 800)
+                number(i) = 5;
+            elseif (1306 < frequency(2,i) < 1366 && 822 < frequency(1,i) < 882)
+                number(i) = 8;
+            elseif (1306 < frequency(2,i) < 1366 && 911 < frequency(1,i) < 971)
+                number(i) = 0;
+            elseif ((1447 < frequency(2,i) < 1507) && 667<frequency(1,i) && frequency(1,i)<727)
+                number(i) = 3;
+            elseif (1447 < frequency(2,i) < 1507 && 740 < frequency(1,i) < 800)
+                number(i) = 6;
+            elseif (1447 < frequency(2,i) < 1507 && 822 < frequency(1,i) < 882)
+                number(i) = 9;
+            else
+                number(i) = 100;
+            end
+end    
+
+number
 
