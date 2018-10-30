@@ -2,7 +2,7 @@
 %%  Alex Topping/John Clapham, Bradley University
 
 %% created 10/20/2016
-%% updated 10/28/2018
+%% updated 10/29/2018
 
 
 
@@ -85,9 +85,6 @@ ylabel('Amplitude');
 %pause ( round(max(t3))*1e-3);
 
 %% Segmentation of dataset 1
-% t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
-% t_end = t_start + 0.6 * (10^4);
-
 t_start = [850 1200 1800 2800 3350 3844 4550 4950 5400 5850]; %from observation
 t_end = [1100 1690 2100 3050 3600 4100 4800 5250 5700 6150]; %from observation
 
@@ -101,58 +98,61 @@ end
 digit_dataset = zeros;
 digit_seg = zeros(length(dataset1),10); 
 
+
+digit_spectrum = zeros;
+M = 44100;
 for i = 1:1:10
     for j = start_sample(i):1:stop_sample(i)
         digit_dataset(j-start_sample(i)+1,i) = dataset1(j); %making a matrix with segments for fft
         digit_seg(j,i) = dataset1(j); %used for plotting segmented signal
     end
+    temp = fft(digit_dataset(:,i),M); %sets temp for plotting reasons
+    for j = 1:1:length(temp)
+        digit_spectrum(j,i) = temp(j); %all zeros except for fft of digit dataset
+    end
 end
 
-digit_spectrum = zeros;
-M = 44100; 
-for i = 1:1:10  %this is really just for plotting reasons
-        temp = fft(digit_dataset(:,i),M);
-        for j = 1:1:length(temp)
-        digit_spectrum(j,i) = temp(j);
-        end
-end
-
-%%ploting (did this in for loop because I didn't want to type it all out...
-% for i = 1:1:10
-%     figure(i); subplot(211);
-%     plot(t1,digit_seg(:,i));
-%     grid on;
-%     xlabel('Time [ms]');
-%     ylabel('Amplitude');
-%     title('segmented signal');
-%     %xlim([t_start(i)-50 t_end(i)+50]);
-%     
-%     subplot(212);
-%     plot(abs(digit_spectrum(:,i)));
-%     title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
-%     xlabel('Frequency [Hz]');
-%     ylabel('Amplitude');
-% 
-%     xlim([0 2000]);
-%     grid on;
-% end
-
-%This is a test to locate the high and low frequency of digit
-figure; subplot(211);
-plot(t1,digit_seg(:,1));
-grid on;
-xlabel('Time [ms]');
-ylabel('Amplitude');
-title('segmented signal');
-xlim([t_start(1)-50 t_end(1)+50]);
+%%
+%ploting (did this in for loop because I didn't want to type it all out...)
+location = zeros;
+for i = 1:1:10
+    figure(i+1); subplot(211);
+    plot(t1,digit_seg(:,i));
+    grid on;
+    xlabel('Time [ms]');
+    ylabel('Amplitude');
+    title('segmented signal');
+    xlim([t_start(i)-50 t_end(i)+50]);
     
-subplot(212);
-plot(abs(digit_spectrum(:,1)));
-findpeaks(real(abs(digit_spectrum(:,1))),'MinPeakProminence',10);
-title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
-xlabel('Frequency [Hz]');
-ylabel('Amplitude');
+    subplot(212);
+    plot(abs(digit_spectrum(:,i)));
+    [amp,freq] = findpeaks(real(abs(digit_spectrum(1:2000,i))),'MinPeakProminence',25,'MinPeakDistance',300); %locs is freq of peaks
+    location(1,i) = freq(1,1);  %making a location matrix with all found freq (col 1 low, col 2 high)
+    location(2,i) = freq(2,1);  %" " "
+    hold on; plot(location(1,i),amp(1,1),'x'); hold on; plot(location(2,i),amp(2,1),'x');
+    title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
+    xlabel('Frequency [Hz]');
+    ylabel('Amplitude');
+    xlim([0 2000]);
+    grid on;
+end
 
-xlim([0 2000]);
-grid on;
+%This is a test to locate the high and low frequency of digit numero uno
+% figure; subplot(211);
+% plot(t1,digit_seg(:,1));
+% grid on;
+% xlabel('Time [ms]');
+% ylabel('Amplitude');
+% title('segmented signal');
+% xlim([t_start(1)-50 t_end(1)+50]);
+%     
+% subplot(212);
+% plot(abs(digit_spectrum(:,1)));
+% [amp,freq] = findpeaks(real(abs(digit_spectrum(1:2000,1))),'MinPeakProminence',10);
+% hold on; plot(freq,amp,'x');
+% title(['spectrum digit5, dataset1'     '   M ='  num2str(M)]);
+% xlabel('Frequency [Hz]');
+% ylabel('Amplitude');
+% xlim([0 2000]);
+% grid on;
 
