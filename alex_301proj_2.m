@@ -98,31 +98,8 @@ dig_8 = dataset1(t_start(8):t_end(8));
 dig_9 = dataset1(t_start(9):t_end(9));
 dig_10 = dataset1(t_start(10):t_end(10));
 
-freq_table = [697 770 852 941 1209 1336 1477 1633];
-q = zeros(1,10);
 
-
-
-
-for i = 1:length(freq_table)
-    
-    num = 1;
-    den = [1 (-2)*(cos(freq_table(i))) 1]; % Where the cosine argument is the frequency of interest
-    
-    goertzel_filt = filter(num, den, dig_1);
-    figure;plot(goertzel_filt)
-    title(strcat("goertzel test digit ",num2str(i)))
-    
-    q(i) = trapz(abs(goertzel_filt));
-end
-
-max_freqs = maxk(q,2);
-
-freq_component1 = freq_table(find(q == max_freqs(1)))
-freq_component2 = freq_table(find(q == max_freqs(2)))
-
-[nerds, blah] = DTMFfinder(t_start(1),t_end(1))
-
+DTMFfinder(t_start(1),t_end(1))
 
 
 

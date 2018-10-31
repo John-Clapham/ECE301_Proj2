@@ -14,18 +14,14 @@ for i = 1:length(freq_table)
     den = [1 (-2)*(cos(freq_table(i))) 1]; % Where the cosine argument is the frequency of interest
     
     goertzel_filt = filter(num, den, dig);
+    figure;plot(goertzel_filt)
+    title(strcat("Goertzel freq ",num2str(freq_table(i))))
     
     q(i) = trapz(abs(goertzel_filt));
 end
 
-max_freqs = maxk(q,2);
-
-freq_component1 = freq_table(find(q == max_freqs(1)))
-freq_component2 = freq_table(find(q == max_freqs(2)))
 
 
 
-outputArg1 = freq_component1;
-outputArg2 = freq_component2;
 end
 
