@@ -101,6 +101,9 @@ dig_10 = dataset1(t_start(10):t_end(10));
 freq_table = [697 770 852 941 1209 1336 1477 1633];
 q = zeros(1,10);
 
+
+
+
 for i = 1:length(freq_table)
     
     num = 1;
@@ -113,8 +116,12 @@ for i = 1:length(freq_table)
     q(i) = trapz(abs(goertzel_filt));
 end
 
-max_q1 = find(max(q));
-freq_component_1 = freq_table(max_q1)
+max_freqs = maxk(q,2);
+
+freq_component1 = freq_table(find(q == max_freqs(1)))
+freq_component2 = freq_table(find(q == max_freqs(2)))
+
+[nerds, blah] = DTMFfinder(t_start(1),t_end(1))
 
 
 
