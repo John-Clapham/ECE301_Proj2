@@ -1,4 +1,4 @@
-function [outputArg1,outputArg2] = DTMFfinder(t_start,t_end)
+function [highfreq,lowfreq] = DTMFfinder(t_start,t_end)
 % Function outputs 2 DTMF frequencies for a single digit
 % Needs t_start and t_end which is a phone beep
 load all_datasets_project2.mat;
@@ -20,8 +20,9 @@ for i = 1:length(freq_table)
     q(i) = trapz(abs(goertzel_filt));
 end
 
-
-
+max_freqs = maxk(q,2);
+lowfreq = freq_table(find(q == max_freqs(1)));
+highfreq = freq_table(find(q == max_freqs(2)));
 
 end
 

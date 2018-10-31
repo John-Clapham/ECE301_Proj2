@@ -98,10 +98,10 @@ dig_8 = dataset1(t_start(8):t_end(8));
 dig_9 = dataset1(t_start(9):t_end(9));
 dig_10 = dataset1(t_start(10):t_end(10));
 
+%passes through the goretzel algorithm
+[highfreq,lowfreq] = DTMFfinder(t_start(1),t_end(1))
 
-DTMFfinder(t_start(1),t_end(1))
-
-
+%Passes through number function
 
 
 
