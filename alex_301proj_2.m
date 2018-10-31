@@ -57,10 +57,10 @@ ylabel('Amplitude');
 
 
 
-figure;plot(t2,dataset2);grid on;
-title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
-xlabel('Time [ms]');
-ylabel('Amplitude');
+% figure;plot(t2,dataset2);grid on;
+% title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
+% xlabel('Time [ms]');
+% ylabel('Amplitude');
 
 %pause ( round(max(t2))*1e-3);
 
@@ -74,10 +74,10 @@ ylabel('Amplitude');
 
 %soundsc(dataset3,fs); %% play the signal of heavy over-talk
 
-figure;plot(t3,dataset3);grid on;
-title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
-xlabel('Time [ms]');
-ylabel('Amplitude');
+% figure;plot(t3,dataset3);grid on;
+% title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
+% xlabel('Time [ms]');
+% ylabel('Amplitude');
 
 
 %pause ( round(max(t3))*1e-3);
@@ -99,12 +99,16 @@ dig_9 = dataset1(t_start(9):t_end(9));
 dig_10 = dataset1(t_start(10):t_end(10));
 
 %passes through the goretzel algorithm
-[highfreq,lowfreq] = DTMFfinder(t_start(1),t_end(1))
+for i = 1:10
+    [highfreq(i),lowfreq(i)] = DTMFfinder(t_start(i),t_end(i));
+end
 
 %Passes through number function
+for i = 1:10
+    number(i) = numberfinder(highfreq(i),lowfreq(i));
+end
 
-
-
+number
 
 
 
