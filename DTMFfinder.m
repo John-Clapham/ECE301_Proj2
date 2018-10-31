@@ -11,7 +11,8 @@ q = zeros(1,10);
 
 for i = 1:length(freq_table)
     num = 1;
-    den = [1 (-2)*(cos(freq_table(i))) 1]; % Where the cosine argument is the frequency of interest
+    %den = [1 (-2)*(cos(freq_table(i))) 1]; % Where the cosine argument is the frequency of interest
+    den = [1 -exp(1i*i)];
     
     goertzel_filt = filter(num, den, dig);
     figure;plot(goertzel_filt)
