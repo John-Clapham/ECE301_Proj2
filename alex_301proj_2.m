@@ -118,8 +118,8 @@ end
 
 max_freqs = maxk(q,2);
 
-freq_component1 = freq_table(find(q == max_freqs(1)))
-freq_component2 = freq_table(find(q == max_freqs(2)))
+freq_component1 = freq_table(find(q == max_freqs(1)));
+freq_component2 = freq_table(find(q == max_freqs(2)));
 
 [nerds, blah] = DTMFfinder(t_start(1),t_end(1))
 
