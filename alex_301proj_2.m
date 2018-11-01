@@ -102,9 +102,16 @@ dig_10 = dataset1(t_start(10):t_end(10));
 % for i = 1:10
 %     [vk,highfreq(i),lowfreq(i)] = DTMFfinder(t_start(i),t_end(i));
 % end
-[desiredDFT,highfreq,lowfreq] = DTMFfinder(t_start(1),t_end(1));
 
-number = numberfinder(highfreq,lowfreq,desiredDFT);
+for i = 1:10
+    desiredDFT(:,i) = DTMFfinder(t_start(i),t_end(i));
+end
+
+for i = 1:10
+    number(i) = numberfinder(desiredDFT(:,i));
+end
+
+number
 %Passes through number function
 % for i = 1:10
 %     number(i) = numberfinder(highfreq(i),lowfreq(i));
