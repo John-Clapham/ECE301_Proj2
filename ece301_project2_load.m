@@ -83,9 +83,7 @@ ylabel('Amplitude');
 %pause ( round(max(t3))*1e-3);
 
 %% Segmentation 
-<<<<<<< HEAD
-t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
-t_end = t_start + 0.6 * (10^4);
+
 
 dig_1 = dataset1(t_start(1):t_end(1));
 dig_1_fft = abs(fft(dig_1, 44100));
@@ -139,8 +137,4 @@ title("dig 10 fft")
 
 
 
-=======
-t_start = [930 1380 1890 2870 3400 3910 4610 5040 5480]
-t_end = [1070 1520 2030 3010 3540 4050 4750 5181 5620]
->>>>>>> 6deb01e00fc9418e1db2a29bc854d09dbd014047
 
