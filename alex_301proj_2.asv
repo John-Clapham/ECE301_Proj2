@@ -84,14 +84,11 @@ ylabel('Amplitude');
 
 %% Filter
 
-t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05]; % For dataset 1
+t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05]; % Fo
 t_end = t_start + 0.6 * (10^4);
 
-t_start2 = (10^3).*[5.16 6.00 6.85 7.76 8.65 9.38 10.12 11.02 12.09 13.36];
-t_end2 = t_start2 + 130; % Because each beep is 130 ms
-
-t_start3 = (10^3).*[2.43 2.92 3.49 4.28 4.81 5.23 5.65 6.12 6.56 7.00]; % For dataset 3
-t_end3 = t_start3 + 130;
+t_start2 = (10^3).*[2.43 2.92 3.49 4.28 4.81 5.23 5.65 6.12 6.56 7.00]; % For dataset 2
+t_end2 = t_start2 + 0.6 * (10^4);
 
 dig_1 = dataset1(t_start(1):t_end(1));
 dig_2 = dataset1(t_start(2):t_end(2));
