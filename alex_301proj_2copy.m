@@ -5,7 +5,7 @@
 %%revised 10/28/2018
 
 clear all; clc; close all;
-%%% 
+%%%
 fs = 44100; %% 44.1 kHz sampling rate
 nbit = 16;
 channel_num = 1;
@@ -37,10 +37,10 @@ load all_datasets_project2.mat;
 % -----dataset1 : clean DTMF data -------
 %soundsc(dataset1,fs);  
 
-figure;plot(t1,dataset1);grid on;
-title([ 'dataset1;  sampling rate = '  num2str(fs) 'Hz' ]);
-xlabel('Time [ms]');
-ylabel('Amplitude');
+% figure;plot(t1,dataset1);grid on;
+% title([ 'dataset1;  sampling rate = '  num2str(fs) 'Hz' ]);
+% xlabel('Time [ms]');
+% ylabel('Amplitude');
 
 
 %pause ( round(max(t1))*1e-3);
@@ -57,10 +57,10 @@ ylabel('Amplitude');
 
 
 
-% figure;plot(t2,dataset2);grid on;
-% title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
+figure;plot(t2,dataset2);grid on;
+title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
+xlabel('Time [ms]');
+ylabel('Amplitude');
 
 %pause ( round(max(t2))*1e-3);
 
@@ -87,6 +87,9 @@ ylabel('Amplitude');
 t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
 t_end = t_start + 0.6 * (10^4);
 
+% t_start2 = (10^4).*[5.16 6.00 6.85 7.76 8.65 9.38 10.12 11.02 12.09 13.36];
+% t_end2 = t_start2 + 0.6*(10^4); % Because each beep is 130 ms
+
 dig_1 = dataset1(t_start(1):t_end(1));
 dig_2 = dataset1(t_start(2):t_end(2));
 dig_3 = dataset1(t_start(3):t_end(3));
@@ -98,26 +101,14 @@ dig_8 = dataset1(t_start(8):t_end(8));
 dig_9 = dataset1(t_start(9):t_end(9));
 dig_10 = dataset1(t_start(10):t_end(10));
 
-%passes through the goretzel algorithm
-% for i = 1:10
-%     [vk,highfreq(i),lowfreq(i)] = DTMFfinder(t_start(i),t_end(i));
-% end
-
 for i = 1:10
-    desiredDFT(:,i) = DTMFfinder(t_start(i),t_end(i));
+    desiredDFT(:,i) = DTMFfindercopy(t_start(i),t_end(i));
 end
 
 for i = 1:10
-    number(i) = numberfinder(desiredDFT(:,i));
+    number(i) = numberfindercopy(desiredDFT(:,i));
 end
 
 number
-%Passes through number function
-% for i = 1:10
-%     number(i) = numberfinder(highfreq(i),lowfreq(i));
-% end
-% 
-% number
-
 
 
