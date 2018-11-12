@@ -1,19 +1,18 @@
-function [desiredDFT] = DTMFfindercopy(t_start,t_end)
+function [desiredDFT] = DTMFfindercopy(dataset,t_start,t_end)
 % Function outputs 2 DTMF frequencies for a single digit
 % Needs t_start and t_end which is a phone beep
 
 load all_datasets_project2.mat;
-dig = dataset1(t_start:t_end);
+dig = dataset(t_start:t_end);
 
 
 freq_table = [697 770 852 941 1209 1336 1477 1633];
 q = zeros(1,10);
 fs = 44100;
-N = 6000; %not sure why but this seems to work (could be because its the length of the dataset)
-%N = 130;
+N = 6000; %not sure why but this seems to work (could be because the length of the segments)
 k = (N*freq_table)/fs;
-%k = [9.148125 10.10625 11.1825 12.350625 15.868125 17.535 19.385625 21.433125];
 
+%preallocating for speed
 vk1 = zeros(1,N+2);
 vk2 = zeros(1,N+2);
 vk3 = zeros(1,N+2);
@@ -35,11 +34,11 @@ vk8 = zeros(1,N+2);
  end
  
  Wnk = zeros;
- 
  for n = 1:length(freq_table)
      Wnk(n) = exp(((-2)*pi*k(n))/N);
  end
  
+ %calculates the energy levels
  ykN1 = abs(vk1(N+2)-(Wnk(1)*vk1(N+1)))^2;
  ykN2 = abs(vk2(N+2)-(Wnk(2)*vk2(N+1)))^2;
  ykN3 = abs(vk3(N+2)-(Wnk(3)*vk3(N+1)))^2;

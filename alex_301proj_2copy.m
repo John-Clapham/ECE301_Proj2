@@ -37,10 +37,10 @@ load all_datasets_project2.mat;
 % -----dataset1 : clean DTMF data -------
 %soundsc(dataset1,fs);  
 
-% figure;plot(t1,dataset1);grid on;
-% title([ 'dataset1;  sampling rate = '  num2str(fs) 'Hz' ]);
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
+figure;plot(t1,dataset1);grid on;
+title([ 'dataset1;  sampling rate = '  num2str(fs) 'Hz' ]);
+xlabel('Time [ms]');
+ylabel('Amplitude');
 
 
 %pause ( round(max(t1))*1e-3);
@@ -74,41 +74,60 @@ ylabel('Amplitude');
 
 %soundsc(dataset3,fs); %% play the signal of heavy over-talk
 
-% figure;plot(t3,dataset3);grid on;
-% title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
+figure;plot(t3,dataset3);grid on;
+title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
+xlabel('Time [ms]');
+ylabel('Amplitude');
 
 
 %pause ( round(max(t3))*1e-3);
 
-%% Filter
+%% dataset1 no noise
 
 t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
 t_end = t_start + 0.6 * (10^4);
 
-% t_start2 = (10^4).*[5.16 6.00 6.85 7.76 8.65 9.38 10.12 11.02 12.09 13.36];
-% t_end2 = t_start2 + 0.6*(10^4); % Because each beep is 130 ms
-
-dig_1 = dataset1(t_start(1):t_end(1));
-dig_2 = dataset1(t_start(2):t_end(2));
-dig_3 = dataset1(t_start(3):t_end(3));
-dig_4 = dataset1(t_start(4):t_end(4));
-dig_5 = dataset1(t_start(5):t_end(5));
-dig_6 = dataset1(t_start(6):t_end(6));
-dig_7 = dataset1(t_start(7):t_end(7));
-dig_8 = dataset1(t_start(8):t_end(8));
-dig_9 = dataset1(t_start(9):t_end(9));
-dig_10 = dataset1(t_start(10):t_end(10));
-
+desiredDFT = zeros(8,10); %preallocation
 for i = 1:10
-    desiredDFT(:,i) = DTMFfindercopy(t_start(i),t_end(i));
+    desiredDFT(:,i) = DTMFfindercopy(dataset1,t_start(i),t_end(i));
 end
 
+number1 = zeros(1,10); %preallocation
 for i = 1:10
-    number(i) = numberfindercopy(desiredDFT(:,i));
+    number1(i) = numberfindercopy(desiredDFT(:,i));
 end
 
-number
+number1
+
+%% dataset2 half noise
+
+t_start2 = 44.1.*[5100 5950 6800 7700 8600 9310 10100 10900 12100 13400];
+t_end2 = t_start2 + (200*44.1);
 
 
+for i = 1:10
+    desiredDFT(:,i) = DTMFfindercopy(dataset2,t_start2(i),t_end2(i));
+end
+
+
+for i = 1:10
+    number2(i) = numberfindercopy(desiredDFT(:,i));
+end
+
+number2
+
+%% dataset3 full noise
+
+t_start2 = 44.1.*[1350 2850 3450 4200 4750 5200 5600 6000 6500 7000];
+t_end2 = t_start2 + (200*44.1);
+
+for i = 1:10
+    desiredDFT(:,i) = DTMFfindercopy(dataset3,t_start2(i),t_end2(i));
+end
+
+
+for i = 1:10
+    number3(i) = numberfindercopy(desiredDFT(:,i));
+end
+
+number3
