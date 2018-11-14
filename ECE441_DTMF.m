@@ -5,7 +5,7 @@
 %%revised 10/28/2018
 
 clear all; clc; close all;
-%%% 
+%%%
 fs = 44100; %% 44.1 kHz sampling rate
 nbit = 16;
 channel_num = 1;
@@ -57,10 +57,10 @@ ylabel('Amplitude');
 
 
 
-% figure;plot(t2,dataset2);grid on;
-% title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
+figure;plot(t2,dataset2);grid on;
+title([ 'dataset2;  sampling rate = '  num2str(fs) 'Hz' ]);
+xlabel('Time [ms]');
+ylabel('Amplitude');
 
 %pause ( round(max(t2))*1e-3);
 
@@ -74,53 +74,60 @@ ylabel('Amplitude');
 
 %soundsc(dataset3,fs); %% play the signal of heavy over-talk
 
-% figure;plot(t3,dataset3);grid on;
-% title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
-% xlabel('Time [ms]');
-% ylabel('Amplitude');
+figure;plot(t3,dataset3);grid on;
+title([ 'dataset3;  sampling rate = '  num2str(fs) 'Hz' ]);
+xlabel('Time [ms]');
+ylabel('Amplitude');
 
 
 %pause ( round(max(t3))*1e-3);
 
-%% Filter
+%% dataset1 no noise
 
-t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05]; % Fo
+t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
 t_end = t_start + 0.6 * (10^4);
 
-t_start2 = (10^3).*[2.43 2.92 3.49 4.28 4.81 5.23 5.65 6.12 6.56 7.00]; % For dataset 2
-t_end2 = t_start2 + 0.6 * (10^4);
-
-dig_1 = dataset1(t_start(1):t_end(1));
-dig_2 = dataset1(t_start(2):t_end(2));
-dig_3 = dataset1(t_start(3):t_end(3));
-dig_4 = dataset1(t_start(4):t_end(4));
-dig_5 = dataset1(t_start(5):t_end(5));
-dig_6 = dataset1(t_start(6):t_end(6));
-dig_7 = dataset1(t_start(7):t_end(7));
-dig_8 = dataset1(t_start(8):t_end(8));
-dig_9 = dataset1(t_start(9):t_end(9));
-dig_10 = dataset1(t_start(10):t_end(10));
-
-%passes through the goretzel algorithm
-% for i = 1:10
-%     [vk,highfreq(i),lowfreq(i)] = DTMFfinder(t_start(i),t_end(i));
-% end
-
+desiredDFT = zeros(8,10); %preallocation
 for i = 1:10
-    desiredDFT(:,i) = DTMFfinder(t_start(i),t_end(i));
+    desiredDFT(:,i) = DTMFfinder(dataset1,t_start(i),t_end(i));
 end
 
+number1 = zeros(1,10); %preallocation
 for i = 1:10
-    number(i) = numberfinder(desiredDFT(:,i));
+    number1(i) = numberfinder(desiredDFT(:,i));
 end
 
-number
-%Passes through number function
-% for i = 1:10
-%     number(i) = numberfinder(highfreq(i),lowfreq(i));
-% end
-% 
-% number
+number1
+
+%% dataset2 half noise
+
+t_start2 = 44.1.*[5100 5950 6800 7700 8600 9310 10100 10900 12100 13400];
+t_end2 = t_start2 + (200*44.1);
 
 
+for i = 1:10
+    desiredDFT(:,i) = DTMFfinder(dataset2,t_start2(i),t_end2(i));
+end
 
+
+for i = 1:10
+    number2(i) = numberfinder(desiredDFT(:,i));
+end
+
+number2
+
+%% dataset3 full noise
+
+t_start2 = 44.1.*[1350 2850 3450 4200 4750 5200 5600 6000 6500 7000];
+t_end2 = t_start2 + (200*44.1);
+
+for i = 1:10
+    desiredDFT(:,i) = DTMFfinder(dataset3,t_start2(i),t_end2(i));
+end
+
+
+for i = 1:10
+    number3(i) = numberfinder(desiredDFT(:,i));
+end
+
+number3
