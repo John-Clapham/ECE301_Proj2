@@ -1,8 +1,12 @@
 function [number] = numberfinder(desiredDFT)
+
+    %finds location of max
     [M,I] = maxk(desiredDFT,2);
     
+    %sorts based on index
     I = sort(I,'ascend');
     
+    %compares position of 2 max energy levels with associated digit
     if (I(1) == 1 && I(2) == 5)
         number = 1;
     elseif (I(1) == 2 && I(2) == 5)

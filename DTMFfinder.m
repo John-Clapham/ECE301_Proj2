@@ -33,6 +33,7 @@ vk8 = zeros(1,N+2);
     vk8(n) = (2*cos((2*pi*k(8))/N)*vk8(n-1))-vk8(n-2)+dig(n-2);
  end
  
+ %used for calcs
  Wnk = zeros;
  for n = 1:length(freq_table)
      Wnk(n) = exp(((-2)*pi*k(n))/N);

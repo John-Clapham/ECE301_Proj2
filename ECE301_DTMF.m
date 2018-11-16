@@ -84,14 +84,17 @@ ylabel('Amplitude');
 
 %% dataset1 no noise
 
+%segmenting digits
 t_start = (10^4).*[4.1 6.1 8.3 12.7 14.9 17.2 20.3 22 24.16 26.05];
 t_end = t_start + 0.6 * (10^4);
 
+%passing each segment through function
 desiredDFT = zeros(8,10); %preallocation
 for i = 1:10
     desiredDFT(:,i) = DTMFfinder(dataset1,t_start(i),t_end(i));
 end
 
+%finding number associated to energy levels
 number1 = zeros(1,10); %preallocation
 for i = 1:10
     number1(i) = numberfinder(desiredDFT(:,i));
@@ -101,15 +104,16 @@ number1
 
 %% dataset2 half noise
 
+%segmenting digits
 t_start2 = 44.1.*[5100 5950 6800 7700 8600 9310 10100 10900 12100 13400];
 t_end2 = t_start2 + (200*44.1);
 
-
+%passing each segment through function
 for i = 1:10
     desiredDFT(:,i) = DTMFfinder(dataset2,t_start2(i),t_end2(i));
 end
 
-
+%finding number associated to energy levels
 for i = 1:10
     number2(i) = numberfinder(desiredDFT(:,i));
 end
@@ -118,14 +122,16 @@ number2
 
 %% dataset3 full noise
 
+%segmenting digits
 t_start2 = 44.1.*[1350 2850 3450 4200 4750 5200 5600 6000 6500 7000];
 t_end2 = t_start2 + (200*44.1);
 
+%passing each segment through function
 for i = 1:10
     desiredDFT(:,i) = DTMFfinder(dataset3,t_start2(i),t_end2(i));
 end
 
-
+%finding number associated to energy levels
 for i = 1:10
     number3(i) = numberfinder(desiredDFT(:,i));
 end
